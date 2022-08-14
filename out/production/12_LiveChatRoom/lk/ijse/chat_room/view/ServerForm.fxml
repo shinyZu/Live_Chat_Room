@@ -18,20 +18,17 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MaterialDesignIconView>
-      <TextField fx:id="txtMessageBox" layoutX="16.0" layoutY="400.0" prefHeight="37.0" prefWidth="608.0" promptText="Message" style="-fx-background-radius: 20; -fx-background-color: #2d3436;" styleClass="text-position" stylesheets="@assets/styles/styles.css" />
-      <ScrollPane layoutX="14.0" layoutY="44.0" prefHeight="346.0" prefWidth="643.0">
+      <TextField fx:id="txtMessageBox" layoutX="16.0" layoutY="400.0" prefHeight="37.0" prefWidth="608.0" promptText="Message" style="-fx-background-radius: 15; -fx-background-color: #2d3436;" styleClass="text-position" stylesheets="@assets/styles/styles.css" />
+      <ScrollPane fx:id="scrollPane" layoutX="14.0" layoutY="44.0" prefHeight="346.0" prefWidth="643.0">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="344.0" prefWidth="641.0">
                <children>
-                  <VBox prefHeight="323.0" prefWidth="646.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <ImageView fitHeight="343.0" fitWidth="642.0">
-                           <image>
-                              <Image url="@assets/images/chat_bg11.jpg" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </VBox>
+                  <ImageView fitHeight="344.0" fitWidth="642.0">
+                     <image>
+                        <Image url="@assets/images/chat_bg11.jpg" />
+                     </image>
+                  </ImageView>
+                  <VBox fx:id="vbox_msgs" prefHeight="344.0" prefWidth="646.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
          </content>
