@@ -1,8 +1,7 @@
-#msgField > .text-field > .text {
-    -fx-start-margin: 10px;
-    -fx-padding: 0px 0px 0px 20px;
+#msgField{
+    -fx-padding: 0px 0px 0px 33px;
 }
 
 .text-position{
-    -fx-padding: 0px 0px 0px 30px;
+    -fx-text-fill: aliceblue;
 }

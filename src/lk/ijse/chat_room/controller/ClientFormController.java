@@ -2,13 +2,19 @@ package lk.ijse.chat_room.controller;
 
 import de.jensd.fx.glyphs.emojione.EmojiOneView;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import lk.ijse.chat_room.Server.Server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 public class ClientFormController {
@@ -22,10 +28,14 @@ public class ClientFormController {
     public MaterialDesignIconView btnCamera;
     @FXML
     public MaterialDesignIconView btnAttachment;
+    @FXML
+    public ScrollPane scrollPane;
+    @FXML
+    public VBox vbox_msgs;
 
     private Socket socket = null;
 
-   /* public void initialize() throws IOException {
+    public void initialize() throws IOException {
         socket = new Socket("localhost", 5000);
 
         new Thread(() -> {
@@ -41,10 +51,13 @@ public class ClientFormController {
             }
 
         }).start();
+    }
 
-    }*/
 
-    public void sendMessageOnClick(MouseEvent mouseEvent) {
+    public void sendMessageOnClick(MouseEvent mouseEvent) throws IOException {
+        PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
+        printWriter.println(txtMessageBox.getText());
+        printWriter.flush(); // will go to server
     }
 
     public void displayEmojisOnClick(MouseEvent mouseEvent) {

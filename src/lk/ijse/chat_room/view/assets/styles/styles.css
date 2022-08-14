@@ -1,4 +1,7 @@
-.text-position{
+#msgField{
     -fx-padding: 0px 0px 0px 33px;
+}
+
+.text-position{
     -fx-text-fill: aliceblue;
 }
