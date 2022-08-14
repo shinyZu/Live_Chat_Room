@@ -23,9 +23,26 @@ public class ClientFormController {
     @FXML
     public MaterialDesignIconView btnAttachment;
 
-    public void initialize() throws IOException {
+    private Socket socket = null;
 
-    }
+   /* public void initialize() throws IOException {
+        socket = new Socket("localhost", 5000);
+
+        new Thread(() -> {
+            try{
+                while (!socket.isClosed()) {
+                    InputStreamReader inputStreamReader = new InputStreamReader(socket.getInputStream());
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    String line = bufferedReader.readLine();
+                    System.out.println("Server : " + line);
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }).start();
+
+    }*/
 
     public void sendMessageOnClick(MouseEvent mouseEvent) {
     }
