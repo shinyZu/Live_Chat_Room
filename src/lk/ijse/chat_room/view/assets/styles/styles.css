@@ -1,0 +1,9 @@
+#msgField > .text-field > .text {
+    -fx-start-margin: 10px;
+    -fx-padding: 0px 0px 0px 20px;
+}
+
+.text-position{
+    /*-fx-text-alignment: right;*/
+    -fx-padding: 0px 0px 0px 35px;
+}
