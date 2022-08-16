@@ -30,8 +30,10 @@ public class ServerFormController {
     public MaterialDesignIconView btnSend;
     @FXML
     public TextField txtMessageBox;
+    @FXML
+    public MaterialDesignIconView shutdownServer;
 
-    //    private Socket accept;
+//    private Socket accept;
 //    private TestServer server;
     private Server server;
 
@@ -141,5 +143,10 @@ public class ServerFormController {
             hBox.getChildren().add(textFlow);
             vbox_msgs.getChildren().add(hBox);
         }
+    }
+
+    public void shutdownServerOnClick(MouseEvent mouseEvent) {
+        server.closeServerSocket();
+        Platform.exit();
     }
 }

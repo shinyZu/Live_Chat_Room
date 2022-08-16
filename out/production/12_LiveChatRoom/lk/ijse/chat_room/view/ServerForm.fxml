@@ -36,8 +36,13 @@
       </ScrollPane>
       <Label layoutX="16.0" layoutY="10.0" prefHeight="29.0" prefWidth="67.0" text="Server">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="Noto Sans Mono CJK TC Bold" size="20.0" />
          </font>
       </Label>
+      <MaterialDesignIconView fx:id="shutdownServer" fill="#f7442a" glyphName="POWER" layoutX="620.0" layoutY="36.0" onMouseClicked="#shutdownServerOnClick" pickOnBounds="true" size="25.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MaterialDesignIconView>
    </children>
 </AnchorPane>
