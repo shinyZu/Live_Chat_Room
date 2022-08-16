@@ -2,6 +2,10 @@
     -fx-padding: 0px 0px 0px 33px;
 }
 
+#clientTitle{
+    -fx-padding: 0px 0px 0px 10px;
+}
+
 .text-position{
     -fx-text-fill: aliceblue;
 }

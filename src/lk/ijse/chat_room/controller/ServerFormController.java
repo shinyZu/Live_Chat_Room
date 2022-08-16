@@ -17,12 +17,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import lk.ijse.chat_room.Server.Server;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
-import java.net.Socket;
 
 public class ServerFormController {
 
@@ -35,90 +31,81 @@ public class ServerFormController {
     @FXML
     public TextField txtMessageBox;
 
-    private Socket accept;
+    //    private Socket accept;
+//    private TestServer server;
     private Server server;
 
-    public void initialize(){
+    public void initialize() {
 
-        try{
-            server = new Server(new ServerSocket(5000));
+/*//        new Thread(() -> {
+            try {
+                ServerSocket serverSocket = new ServerSocket(5000);
+                server = new TestServer(serverSocket);
 
-        }catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error");
-        }
-
-        vbox_msgs.heightProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                System.out.println(oldValue);
-                System.out.println(newValue);
-                scrollPane.setVvalue((Double) newValue);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Error");
             }
-        });
 
-        server.receiveMessagesFromClients(vbox_msgs);
-    }
+            vbox_msgs.heightProperty().addListener(new ChangeListener<Number>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                    scrollPane.setVvalue((Double) newValue);
+                }
+            });
 
-    /*private void getClientMessages(VBox vbox_msgs) {
+            server.receiveMessagesFromClients(vbox_msgs);
+//        }).start();*/
+
         new Thread(()->{
             try {
                 ServerSocket serverSocket = new ServerSocket(5000);
                 System.out.println("Server Started...");
+                displayMsgOnRight("Server Started");
 
-                accept = serverSocket.accept();
-                System.out.println("Client Connected!!!");
+                server = new Server(serverSocket);
+                server.startServer(vbox_msgs);
 
-                while(!serverSocket.isClosed()) {
-                    InputStreamReader inputStreamReader = new InputStreamReader(accept.getInputStream());
-                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                    String line = bufferedReader.readLine();
-                    System.out.println("Client : "+line);
-                }
             } catch(Exception e){
                 e.printStackTrace();
             }
         }).start();
-    }*/
 
-    public void sendMessageOnClick(MouseEvent mouseEvent) throws IOException {
-        String message = txtMessageBox.getText();
-        if (!message.isEmpty()){
-            HBox hBox = new HBox();
-            hBox.setAlignment(Pos.CENTER_RIGHT);
-            hBox.setPadding(new Insets(5,5,5,10));
+        vbox_msgs.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                scrollPane.setVvalue((Double) newValue);
+            }
+        });
 
-            Text msgText = new Text(message);
-            TextFlow textFlow = new TextFlow(msgText);
-            textFlow.setStyle("-fx-background-color: #9b59b6; -fx-background-radius: 10 10 0 10");
-            textFlow.setPadding(new Insets(5,10,5,10));
-            msgText.setFill(Color.WHITE);
+        /*new Thread(()->{
+            try {
+                server = new TestServer(new ServerSocket(5000));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            hBox.getChildren().add(textFlow);
-            vbox_msgs.getChildren().add(hBox);
+            vbox_msgs.heightProperty().addListener(new ChangeListener<Number>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                    scrollPane.setVvalue((Double) newValue);
+                }
+            });
 
-            server.sendMessageToClient(message);
-            txtMessageBox.clear();
-        }
+            server.receiveMessagesFromClients(vbox_msgs);
+        }).start();*/
+
     }
 
-    /*private void sendMessageToClients(String message) throws IOException {
-        PrintWriter printWriter = new PrintWriter(accept.getOutputStream());
-        printWriter.println(message);
-        printWriter.flush(); // will go to clients
-
-        txtMessageBox.clear();
-    }*/
-
-    public static void displayMsgOnChat(String msgFromClient, VBox vBox) {
+    public static void displayMsgOnLeft(String msgFromClient, VBox vBox) {
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
-        hBox.setPadding(new Insets(5,5,5,10));
+        hBox.setPadding(new Insets(5, 5, 5, 10));
 
         Text msgText = new Text(msgFromClient);
         TextFlow textFlow = new TextFlow(msgText);
         textFlow.setStyle("-fx-text-fill: #fff; -fx-background-color: #7f8c8d; -fx-background-radius: 10 10 10 0");
-        textFlow.setPadding(new Insets(5,10,5,10));
+        textFlow.setPadding(new Insets(5, 10, 5, 10));
         msgText.setFill(Color.WHITE);
 
         hBox.getChildren().add(textFlow);
@@ -132,4 +119,27 @@ public class ServerFormController {
         });
     }
 
+    public void sendMessageOnClick(MouseEvent mouseEvent) throws IOException {
+        String message = txtMessageBox.getText();
+        displayMsgOnRight(message);
+//        server.sendMessageToClient(message);
+        txtMessageBox.clear();
+    }
+
+    public void displayMsgOnRight(String message) {
+        if (!message.isEmpty()) {
+            HBox hBox = new HBox();
+            hBox.setAlignment(Pos.CENTER_RIGHT);
+            hBox.setPadding(new Insets(5, 5, 5, 10));
+
+            Text msgText = new Text(message);
+            TextFlow textFlow = new TextFlow(msgText);
+            textFlow.setStyle("-fx-background-color: #9b59b6; -fx-background-radius: 10 10 0 10");
+            textFlow.setPadding(new Insets(5, 10, 5, 10));
+            msgText.setFill(Color.WHITE);
+
+            hBox.getChildren().add(textFlow);
+            vbox_msgs.getChildren().add(hBox);
+        }
+    }
 }
