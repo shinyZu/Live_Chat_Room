@@ -227,7 +227,7 @@ public class ClientFormController {
         hBox.setPadding(new Insets(5, 5, 5, 10));
 
         System.out.println("sendersName------------ "+sendersName);
-        Text employeeName = new Text(sendersName);
+        Text employeeName = new Text(sendersName+" : ");
         TextFlow textFlow = new TextFlow(employeeName);
         textFlow.setStyle("-fx-color:#fff; -fx-background-color: #7f8c8d; -fx-background-radius: 10 0 0 10");
         textFlow.setPadding(new Insets(5, 10, 5, 10));

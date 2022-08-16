@@ -29,12 +29,12 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="616.0" prefWidth="624.0" style="-fx-background-color: #2d3436;">
                <children>
-                  <ImageView fitHeight="345.0" fitWidth="626.0" layoutY="275.0">
+                  <ImageView fitHeight="344.0" fitWidth="626.0">
                      <image>
                         <Image url="@assets/images/chat_bg11.jpg" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="344.0" fitWidth="626.0">
+                  <ImageView fitHeight="345.0" fitWidth="626.0" layoutY="275.0">
                      <image>
                         <Image url="@assets/images/chat_bg11.jpg" />
                      </image>

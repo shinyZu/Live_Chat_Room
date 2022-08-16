@@ -1,34 +1,21 @@
-# Enterprise Level Application with Spring Web MVC and React JS
+# Live Group Chat App with Java Socket Programming
 
 <br>
 
-## Car_Rental_System
+## coursework given for module Introduction to Network Programming.....
 
 <br>
 
 ## Used :
 
-- React JS
-- Axios
-- MUI Components
-- DevExtreme Charts
-- Spring Web MVC
-- Spring Data JPA
-- Apache Tomcat Web Container
-- Maven
-- Hibernate
-- MySQL
-- SweetAlerts
+- Java Socket Programming
+- JavaFX
+- Multi-Threading
+- MVC Architecture
+- Cascade Style Sheets
 
 <br><br>
 
-<img src = "frontend/src/assets/images/screenshots/5.png" alt = "sample"> <br><br>
-<img src = "frontend/src/assets/images/screenshots/6.png" alt = "sample"> <br><br>
-<img src = "frontend/src/assets/images/screenshots/10.png" alt = "sample"> <br><br>
-<img src = "frontend/src/assets/images/screenshots/7.png" alt = "sample"> <br><br>
-<img src = "frontend/src/assets/images/screenshots/8.png" alt = "sample"> <br><br>
-<img src = "frontend/src/assets/images/screenshots/9.png" alt = "sample"> <br><br>
-<img src = "frontend/src/assets/images/screenshots/1.png" alt = "sample"> <br><br>
-<img src = "frontend/src/assets/images/screenshots/2.png" alt = "sample"> <br><br>
-<img src = "frontend/src/assets/images/screenshots/3.png" alt = "sample"> <br><br>
-<img src = "frontend/src/assets/images/screenshots/4.png" alt = "sample"> <br><br>
+<img src = "src/lk/ijse/chat_room/view/assets/images/screenshots/8.png" alt = "sample"> <br><br>
+<img src = "src/lk/ijse/chat_room/view/assets/images/screenshots/3.png" alt = "sample"> <br><br>
+<img src = "src/lk/ijse/chat_room/view/assets/images/screenshots/4.png" alt = "sample"> <br><br>
