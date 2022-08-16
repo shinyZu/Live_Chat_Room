@@ -6,23 +6,23 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
+import javafx.stage.FileChooser;
 import lk.ijse.chat_room.Client.Client;
-import lk.ijse.chat_room.Client.ClientHandler;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -46,20 +46,36 @@ public class ClientFormController {
     @FXML
     public MaterialDesignIconView btnLeaveChat;
 
+    private ImageView myImageView;
+
+    private File file;
+
     private Client client;
 //    private TestClient client;
 
     public void initialize() {
-        new Thread(()->{
-            try{
+        System.out.println("inside initialize()");
+        new Thread(() -> {
+            try {
                 lblClient.setText(LoginFormController.username);
-                client = new Client(new Socket("localhost",5000), LoginFormController.username, vbox_msgs);
-                System.out.println("Connected to TestServer");
+                client = new Client(new Socket("localhost", 5000), LoginFormController.username, vbox_msgs);
+                System.out.println("Connected to Server");
 
-                client.listenForMessage(vbox_msgs);
-                client.sendMessage(LoginFormController.username+" has joined the chat!",vbox_msgs);
+                client.listenForMessages(vbox_msgs);
 
-            } catch (IOException e){
+//                if (file == null) {
+//                    client.listenForMessages(vbox_msgs);
+//                } else {
+//                    client.listenForImages(vbox_msgs);
+//                }
+
+//                System.out.println(file);
+//                if (file != null) {
+//                }
+
+                client.sendMessage(LoginFormController.username + " has joined the chat!", vbox_msgs);
+
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }).start();
@@ -112,21 +128,21 @@ public class ClientFormController {
         }*/
         String messageToSend = txtMessageBox.getText();
         displayMessageOnRight(messageToSend);
-        client.sendMessage(messageToSend,vbox_msgs);
+        client.sendMessage(messageToSend, vbox_msgs);
 //        client.sendMessageToServer(messageToSend);
         txtMessageBox.clear();
     }
 
-    public void displayMessageOnRight(String messageToSend){
-        if (!messageToSend.isEmpty()){
+    public void displayMessageOnRight(String messageToSend) {
+        if (!messageToSend.isEmpty()) {
             HBox hBox = new HBox();
             hBox.setAlignment(Pos.CENTER_RIGHT);
-            hBox.setPadding(new Insets(5,5,5,10));
+            hBox.setPadding(new Insets(5, 5, 5, 10));
 
             Text msgText = new Text(messageToSend);
             TextFlow textFlow = new TextFlow(msgText);
             textFlow.setStyle("-fx-background-color: #9b59b6; -fx-background-radius: 10 10 0 10");
-            textFlow.setPadding(new Insets(5,10,5,10));
+            textFlow.setPadding(new Insets(5, 10, 5, 10));
             msgText.setFill(Color.WHITE);
 
             hBox.getChildren().add(textFlow);
@@ -137,12 +153,12 @@ public class ClientFormController {
     public static void displayMsgOnLeft(String message, VBox vBox) {
         HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
-        hBox.setPadding(new Insets(5,5,5,10));
+        hBox.setPadding(new Insets(5, 5, 5, 10));
 
         Text msgText = new Text(message);
         TextFlow textFlow = new TextFlow(msgText);
         textFlow.setStyle("-fx-color:#fff; -fx-background-color: #7f8c8d; -fx-background-radius: 10 10 10 0");
-        textFlow.setPadding(new Insets(5,10,5,10));
+        textFlow.setPadding(new Insets(5, 10, 5, 10));
         msgText.setFill(Color.WHITE);
 
         hBox.getChildren().add(textFlow);
@@ -162,12 +178,80 @@ public class ClientFormController {
     public void openCameraOnClick(MouseEvent mouseEvent) {
     }
 
-    public void displayFilesOnClick(MouseEvent mouseEvent) {
+    public void sendImagesOnClick(MouseEvent mouseEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Image");
+
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+
+        //Show open file dialog
+         file = fileChooser.showOpenDialog(null);
+
+        if (file != null) {
+            Image image = new Image(file.toURI().toString());
+//            System.out.println(file.toURI().toString());
+            myImageView = new ImageView(image);
+            myImageView.setFitHeight(100);
+            myImageView.setFitWidth(100);
+
+            displayImageOnRight();
+//            System.out.println("before calling sendImage");
+            client.sendImage(file, vbox_msgs);
+//            System.out.println("after calling sendImage");
+        }
     }
 
-    public void leaveChatOnAction(MouseEvent mouseEvent) throws IOException {
+    public void displayImageOnRight() {
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.CENTER_RIGHT);
+        hBox.setPadding(new Insets(10, 5, 5, 10));
+
+//        Text employeeName = new Text(LoginFormController.username);
+        Text text = new Text("");
+        TextFlow textFlow = new TextFlow(text);
+        textFlow.setStyle("-fx-background-color: #9b59b6; -fx-background-radius: 10 0 0 10");
+        textFlow.setPadding(new Insets(5, 10, 5, 10));
+        text.setFill(Color.WHITE);
+
+        hBox.getChildren().add(textFlow);
+        hBox.getChildren().add(myImageView);
+        vbox_msgs.getChildren().add(hBox);
+    }
+
+    public static void displayImageOnLeft(String sendersName, Image img, VBox vBox) {
+        HBox hBox = new HBox();
+        hBox.setAlignment(Pos.CENTER_LEFT);
+        hBox.setPadding(new Insets(5, 5, 5, 10));
+
+        System.out.println("sendersName------------ "+sendersName);
+        Text employeeName = new Text(sendersName);
+        TextFlow textFlow = new TextFlow(employeeName);
+        textFlow.setStyle("-fx-color:#fff; -fx-background-color: #7f8c8d; -fx-background-radius: 10 0 0 10");
+        textFlow.setPadding(new Insets(5, 10, 5, 10));
+        employeeName.setFill(Color.WHITE);
+
+        hBox.getChildren().add(textFlow);
+
+        ImageView imageView = new ImageView(img);
+        imageView.setFitHeight(100);
+        imageView.setFitWidth(100);
+        hBox.getChildren().add(imageView);
+
+        // javafx gui can be updated only with javafx application thread
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                vBox.getChildren().add(hBox);
+            }
+        });
+    }
+
+    public void leaveChatOnClick(MouseEvent mouseEvent) throws IOException {
         System.out.println("clicked to logout");
-        client.sendMessage(LoginFormController.username+ " has left the chat!", vbox_msgs);
+        client.sendMessage(LoginFormController.username + " has left the chat!", vbox_msgs);
 
 //        Stage stage = (Stage) btnLeaveChat.getScene().getWindow();
 //        stage.close();

@@ -3,6 +3,10 @@
 }
 
 #clientTitle{
+    -fx-padding: 0px 0px 0px 40px;
+}
+
+#serverTitle{
     -fx-padding: 0px 0px 0px 10px;
 }
 

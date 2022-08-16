@@ -4,6 +4,8 @@ import javafx.scene.layout.VBox;
 import lk.ijse.chat_room.controller.LoginFormController;
 import lk.ijse.chat_room.controller.ServerFormController;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -21,12 +23,15 @@ public class ClientHandler implements Runnable {
 
     private String username;
 
+    private BufferedImage bufferedImage;
+
     public ClientHandler(Socket socket, VBox vBox) {
         try {
             this.socket = socket;
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             this.out = new PrintWriter(socket.getOutputStream(), true);
+//            this.bufferedImage = ImageIO.read(socket.getInputStream());
             this.username = bufferedReader.readLine();
             this.vBox = vBox;
 
@@ -40,16 +45,19 @@ public class ClientHandler implements Runnable {
         } catch (IOException e) {
             closeAll(this.socket, this.bufferedReader, this.bufferedWriter);
         }
-
     }
 
     @Override
     public void run() {
-        ServerFormController.displayMsgOnLeft(username+" has joined the chat", vBox);
+        ServerFormController.displayMsgOnLeft(username+" has joined the chat!", vBox);
         String msgFromClient;
 
         while (socket.isConnected()) {
             try {
+//                System.out.println("bufferedImage in Clienthandler : "+bufferedImage);
+//                if (bufferedImage != null) {
+//                }
+
                 // the program will halt here until it receives a msg from client--> hence we run it in a separate thread
                 // so the rest of the program will not be stuck/blocked bcz this is a blocking operation
                 msgFromClient = bufferedReader.readLine();

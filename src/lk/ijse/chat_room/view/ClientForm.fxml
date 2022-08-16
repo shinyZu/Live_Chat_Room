@@ -12,16 +12,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="465.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chat_room.controller.ClientFormController">
+<AnchorPane prefHeight="440.0" prefWidth="651.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chat_room.controller.ClientFormController">
 <!--<AnchorPane prefHeight="448.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chat_room.controller.CFController">-->
    <children>
-      <MaterialDesignIconView fx:id="btnSend" fill="#b20bb5" glyphName="SEND" layoutX="632.0" layoutY="442.0" onMouseClicked="#sendMessageOnClick" pickOnBounds="true" size="25.0">
+      <MaterialDesignIconView fx:id="btnSend" fill="#b20bb5" glyphName="SEND" layoutX="622.0" layoutY="428.0" onMouseClicked="#sendMessageOnClick" pickOnBounds="true" size="25.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </MaterialDesignIconView>
-      <TextField id="msgField" fx:id="txtMessageBox" layoutX="16.0" layoutY="414.0" prefHeight="37.0" prefWidth="608.0" promptText="Message" style="-fx-background-radius: 20; -fx-background-color: #2d3436;" styleClass="text-position" stylesheets="@assets/styles/styles.css" />
-      <ScrollPane fx:id="scrollPane" layoutX="14.0" layoutY="58.0" prefHeight="346.0" prefWidth="643.0">
+      <TextField id="msgField" fx:id="txtMessageBox" layoutX="6.0" layoutY="400.0" prefHeight="37.0" prefWidth="608.0" promptText="Message" style="-fx-background-radius: 20; -fx-background-color: #2d3436;" styleClass="text-position" stylesheets="@assets/styles/styles.css" />
+      <ScrollPane fx:id="scrollPane" layoutX="4.0" layoutY="51.0" prefHeight="346.0" prefWidth="643.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="344.0" prefWidth="641.0">
                <children>
@@ -35,27 +35,32 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <EmojiOneView fx:id="btnEmoji" fill="WHITE" layoutX="23.0" layoutY="440.0" onMouseClicked="#displayEmojisOnClick" pickOnBounds="true" size="20.0">
+      <EmojiOneView fx:id="btnEmoji" fill="WHITE" layoutX="13.0" layoutY="426.0" onMouseClicked="#displayEmojisOnClick" pickOnBounds="true" size="20.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </EmojiOneView>
-      <MaterialDesignIconView fx:id="btnCamera" fill="WHITE" glyphName="CAMERA" layoutX="591.0" layoutY="440.0" onMouseClicked="#openCameraOnClick" pickOnBounds="true" size="20.0">
+      <MaterialDesignIconView fx:id="btnCamera" fill="WHITE" glyphName="CAMERA" layoutX="581.0" layoutY="426.0" onMouseClicked="#openCameraOnClick" pickOnBounds="true" size="20.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </MaterialDesignIconView>
-      <MaterialDesignIconView fx:id="btnAttachment" fill="WHITE" glyphName="ATTACHMENT" layoutX="565.0" layoutY="440.0" onMouseClicked="#displayFilesOnClick" pickOnBounds="true" rotate="-128.7" size="20.0">
+      <MaterialDesignIconView fx:id="btnAttachment" fill="WHITE" glyphName="ATTACHMENT" layoutX="555.0" layoutY="426.0" onMouseClicked="#sendImagesOnClick" pickOnBounds="true" rotate="-128.7" size="20.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </MaterialDesignIconView>
-      <Label id="clientTitle" fx:id="lblClient" layoutX="16.0" layoutY="10.0" prefHeight="44.0" prefWidth="643.0" style="-fx-background-color: #2d3436; -fx-background-radius: 5;" styleClass="text-position" stylesheets="@assets/styles/styles.css" text="Client" textFill="#b20bb5">
+      <Label id="clientTitle" fx:id="lblClient" layoutX="6.0" layoutY="3.0" prefHeight="44.0" prefWidth="639.0" style="-fx-background-color: #2d3436; -fx-background-radius: 5;" styleClass="text-position" stylesheets="@assets/styles/styles.css" text="Client" textFill="#b20bb5">
          <font>
             <Font name="Noto Sans Mono CJK TC Bold" size="20.0" />
          </font>
       </Label>
-      <MaterialDesignIconView fx:id="btnLeaveChat" fill="WHITE" glyphName="LOGOUT" layoutX="620.0" layoutY="41.0" onMouseClicked="#leaveChatOnAction" pickOnBounds="true" size="25.0">
+      <MaterialDesignIconView fx:id="btnLeaveChat" fill="WHITE" glyphName="LOGOUT" layoutX="610.0" layoutY="34.0" onMouseClicked="#leaveChatOnClick" pickOnBounds="true" size="25.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MaterialDesignIconView>
+      <MaterialDesignIconView fill="WHITE" glyphName="ACCOUNT_CIRCLE" layoutX="11.0" layoutY="36.0" pickOnBounds="true" size="30.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

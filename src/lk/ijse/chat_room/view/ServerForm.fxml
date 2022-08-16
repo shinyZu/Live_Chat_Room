@@ -11,16 +11,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="448.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chat_room.controller.ServerFormController">
+<AnchorPane prefHeight="435.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chat_room.controller.ServerFormController">
 <!--<AnchorPane prefHeight="448.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chat_room.controller.SFController">-->
    <children>
-      <MaterialDesignIconView fx:id="btnSend" fill="#b20bb5" glyphName="SEND" layoutX="632.0" layoutY="428.0" onMouseClicked="#sendMessageOnClick" pickOnBounds="true" size="25.0">
+      <MaterialDesignIconView fx:id="btnSend" fill="#b20bb5" glyphName="SEND" layoutX="620.0" layoutY="424.0" onMouseClicked="#sendMessageOnClick" pickOnBounds="true" size="25.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </MaterialDesignIconView>
-      <TextField fx:id="txtMessageBox" layoutX="16.0" layoutY="400.0" prefHeight="37.0" prefWidth="608.0" promptText="Message" style="-fx-background-radius: 15; -fx-background-color: #2d3436;" styleClass="text-position" stylesheets="@assets/styles/styles.css" />
-      <ScrollPane fx:id="scrollPane" layoutX="14.0" layoutY="44.0" prefHeight="346.0" prefWidth="643.0">
+      <TextField fx:id="txtMessageBox" layoutX="4.0" layoutY="396.0" prefHeight="37.0" prefWidth="608.0" promptText="Message" style="-fx-background-radius: 15; -fx-background-color: #2d3436;" styleClass="text-position" stylesheets="@assets/styles/styles.css" />
+      <ScrollPane fx:id="scrollPane" layoutX="2.0" layoutY="48.0" prefHeight="346.0" prefWidth="643.0">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="344.0" prefWidth="641.0">
                <children>
@@ -34,12 +34,12 @@
             </AnchorPane>
          </content>
       </ScrollPane>
-      <Label layoutX="16.0" layoutY="10.0" prefHeight="29.0" prefWidth="67.0" text="Server">
+      <Label id="serverTitle" layoutX="2.0" layoutY="2.0" prefHeight="44.0" prefWidth="643.0" style="-fx-background-color: #2d3436; -fx-background-radius: 10;" styleClass="text-position" stylesheets="@assets/styles/styles.css" text="Server" textFill="WHITE">
          <font>
             <Font name="Noto Sans Mono CJK TC Bold" size="20.0" />
          </font>
       </Label>
-      <MaterialDesignIconView fx:id="shutdownServer" fill="#f7442a" glyphName="POWER" layoutX="620.0" layoutY="36.0" onMouseClicked="#shutdownServerOnClick" pickOnBounds="true" size="25.0">
+      <MaterialDesignIconView fx:id="shutdownServer" fill="WHITE" glyphName="POWER" layoutX="606.0" layoutY="33.0" onMouseClicked="#shutdownServerOnClick" pickOnBounds="true" size="25.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
