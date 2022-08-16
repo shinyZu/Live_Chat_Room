@@ -11,25 +11,35 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="435.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chat_room.controller.ServerFormController">
+<AnchorPane prefHeight="440.0" prefWidth="613.0" style="-fx-background-color: #2d3436;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chat_room.controller.ServerFormController">
 <!--<AnchorPane prefHeight="448.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.chat_room.controller.SFController">-->
    <children>
-      <MaterialDesignIconView fx:id="btnSend" fill="#b20bb5" glyphName="SEND" layoutX="620.0" layoutY="424.0" onMouseClicked="#sendMessageOnClick" pickOnBounds="true" size="25.0">
+      <ImageView fitHeight="449.0" fitWidth="657.0" layoutX="-9.0" layoutY="-9.0">
+         <image>
+            <Image url="@assets/images/chat_bg11.jpg" />
+         </image>
+      </ImageView>
+      <MaterialDesignIconView fx:id="btnSend" fill="WHITE" glyphName="SEND" layoutX="620.0" layoutY="424.0" onMouseClicked="#sendMessageOnClick" pickOnBounds="true" size="25.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </MaterialDesignIconView>
-      <TextField fx:id="txtMessageBox" layoutX="4.0" layoutY="396.0" prefHeight="37.0" prefWidth="608.0" promptText="Message" style="-fx-background-radius: 15; -fx-background-color: #2d3436;" styleClass="text-position" stylesheets="@assets/styles/styles.css" />
-      <ScrollPane fx:id="scrollPane" layoutX="2.0" layoutY="48.0" prefHeight="346.0" prefWidth="643.0">
+      <TextField fx:id="txtMessageBox" layoutX="7.0" layoutY="398.0" prefHeight="39.0" prefWidth="608.0" promptText="Message" style="-fx-background-radius: 15; -fx-background-color: #95a5a6;" styleClass="text-position" stylesheets="@assets/styles/styles.css" />
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="2.0" layoutY="48.0" prefHeight="346.0" prefWidth="643.0" style="-fx-background-color: #2d3436;" stylesheets="@assets/styles/styles.css">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="344.0" prefWidth="641.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="616.0" prefWidth="624.0" style="-fx-background-color: #2d3436;">
                <children>
-                  <ImageView fitHeight="344.0" fitWidth="642.0">
+                  <ImageView fitHeight="345.0" fitWidth="626.0" layoutY="275.0">
                      <image>
                         <Image url="@assets/images/chat_bg11.jpg" />
                      </image>
                   </ImageView>
-                  <VBox fx:id="vbox_msgs" prefHeight="344.0" prefWidth="646.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <ImageView fitHeight="344.0" fitWidth="626.0">
+                     <image>
+                        <Image url="@assets/images/chat_bg11.jpg" />
+                     </image>
+                  </ImageView>
+                  <VBox fx:id="vbox_msgs" prefHeight="874.0" prefWidth="625.0" AnchorPane.bottomAnchor="-258.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
          </content>

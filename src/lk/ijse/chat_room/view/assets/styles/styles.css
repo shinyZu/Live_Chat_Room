@@ -1,4 +1,5 @@
-#msgField{
+#msgField,
+#msgField > .text{
     -fx-padding: 0px 0px 0px 33px;
 }
 
@@ -10,32 +11,35 @@
     -fx-padding: 0px 0px 0px 10px;
 }
 
-.text-position{
+.text-position {
     -fx-text-fill: aliceblue;
 }
 
 
-
+.scroll-pane > .scroll-bar:vertical,
 .scroll-pane > .scroll-bar:vertical > .track,
 .scroll-pane > .scroll-bar:horizontal > .track,
 .scroll-pane > .scroll-bar:vertical > .track-background,
 .scroll-pane > .scroll-bar:horizontal > .track-background {
     /*-fx-background-color: #2c3e50 !*transparent*!;*/
     -fx-background-color:  #2d3436 transparent;
+    /*-fx-opacity: 0.1;*/
     /*-fx-padding-right: 2px;*/
-    /*-fx-background-radius: 5px;*/
+    -fx-background-radius: 50%;
+    -fx-background-insets: 15, 0, 0;
 }
 
-.scroll-pane > .scroll-bar:vertical > .track,
-.scroll-pane > .scroll-bar:horizontal > .track{
-    visibility: hidden;
-}
+/*.scroll-pane > .scroll-bar:vertical > .track,*/
+/*.scroll-pane > .scroll-bar:horizontal > .track{*/
+/*    visibility: hidden;*/
+/*}*/
 
 .scroll-pane > .scroll-bar:horizontal > .thumb,
 .scroll-pane > .scroll-bar:vertical > .thumb{
     -fx-background-color:  white;
     /*-fx-background-color:  #b20bb5 ;*/
     -fx-opacity: 50%;
+    /*-fx-opacity: 1;*/
     -fx-background-insets: 5, 0, 0;
 }
 
@@ -47,4 +51,5 @@
 .scroll-pane > .corner{
     /*  -fx-background-color:  #bdc3c7;*/
     -fx-background-color: #2d3436;
+    -fx-opacity: 50%;
 }
