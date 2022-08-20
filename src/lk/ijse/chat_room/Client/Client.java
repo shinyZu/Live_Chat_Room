@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
 import java.net.URI;
+import java.util.ArrayList;
 
 public class Client {
 
@@ -23,6 +24,8 @@ public class Client {
 
     private BufferedImage bufferedImage;
     private Image fxImage;
+
+    private VBox sendersVBox;
 
     public Client(Socket socket, String username, VBox vBox) {
         try {
@@ -38,7 +41,8 @@ public class Client {
     }
 
     // To Server
-    public void sendMessage(String msgToSend, VBox vBox) {
+    public void sendMessage(String msgToSend, VBox vBox, String sendersName) {
+        this.sendersVBox = vBox;
         new Thread(() -> {
             try {
                 this.bufferedWriter.write(username);
@@ -74,8 +78,6 @@ public class Client {
                 this.bufferedWriter.newLine();
                 this.bufferedWriter.flush();
 
-//            ClientFormController.displayMsgOnLeft(this.bufferedReader.readLine(), vBox);
-
             } catch (IOException e) {
                 closeAll(this.socket, this.bufferedReader, this.bufferedWriter);
             }
@@ -83,42 +85,57 @@ public class Client {
 
     }
 
-    // msgs from Server & other broadcast msgs from group members
-    public void listenForMessages(VBox vBox) {
+    // listen/get messages from the server, and other clients
+    public void listenForMessages(VBox vBox, String username) {
 //        System.out.println("inside listenForMessage");
+//        System.out.println("--------username-"+ username+"-");
         new Thread(() -> {
             String msgFromChat = null;
             String imgFromChat = null;
-            while (socket.isConnected()) {
+            while (socket.isConnected() && !username.equals("SERVER")) {
                 try {
                     msgFromChat = bufferedReader.readLine();
-                    System.out.println("msgFromChat: "+msgFromChat);
+//                    System.out.println("msgFromChat: "+msgFromChat);
 
                     if (msgFromChat.contains(".jpg") || msgFromChat.contains(".png")) {
-                        System.out.println("---------------photo msg-------------");
+//                        System.out.println("---------------photo msg-------------");
                         imgFromChat = msgFromChat;
-                        System.out.println("imgFromChat; "+imgFromChat);
+//                        System.out.println("imgFromChat; "+imgFromChat);
 
                         String[] strings = imgFromChat.split(" : "); // shiny1 : /home/shinyT480/Downloads/Images/female_profile.jpg
 
                         if (strings.length == 2) {
-                            String sendersName = strings[0]; // "shiny1"
-                            System.out.println("sendersName: "+sendersName);
+                            String sendersName = strings[0].trim();
+//                            System.out.println("sendersName: "+sendersName);
 
                             String filePath = strings[1];
-
                             bufferedImage = ImageIO.read(new File(filePath));
                             fxImage = SwingFXUtils.toFXImage(bufferedImage, null);
-                            ClientFormController.displayImageOnLeft(sendersName, fxImage, vBox);
+
+                            if (sendersName.equals("sender")) {
+                                ClientFormController.displayImageOnRight(fxImage, vBox);
+                            } else {
+                                ClientFormController.displayImageOnLeft(sendersName, fxImage, vBox);
+                            }
                         }
 
                     } else if (!msgFromChat.contains(".jpg") || !msgFromChat.contains(".png")) {
-                        System.out.println("---------------string msg-------------");
-                        String[] strings = msgFromChat.split(":");
+//                        System.out.println("---------------string msg-------------");
+                        String[] strings = msgFromChat.split(":"); // shiny1 : Hii
+                        String sendersName = strings[0].trim();
+
+//                        System.out.println("strings[0]-"+sendersName+"-");
 
                         //  if string messages
                         if (strings.length == 2 || msgFromChat.contains(" has joined") || msgFromChat.contains("left") ) {
-                            ClientFormController.displayMsgOnLeft(msgFromChat, vBox);
+//                            ClientFormController.displayMsgOnLeft(msgFromChat, vBox);
+//                            System.out.println("*"+username+"*===*"+sendersName+"*");
+
+                            if (sendersName.equals("sender")) {
+                                ClientFormController.displayMessageOnRight(msgFromChat.split(" : ")[1], vBox);
+                            } else {
+                                ClientFormController.displayMsgOnLeft(msgFromChat, vBox);
+                            }
                         }
                     }
 
@@ -154,8 +171,6 @@ public class Client {
             }
 
 //            sendMessage(url, vBox);
-
-
             /*try {
                 //read image
                 this.bufferedImage = ImageIO.read(file);
@@ -180,7 +195,7 @@ public class Client {
 
     }
 
-    public void listenForImages(VBox vBox) {
+    /*public void listenForImages(VBox vBox) {
         new Thread(() -> {
             String imgFromChat = null;
             while (socket.isConnected()) {
@@ -222,7 +237,7 @@ public class Client {
                 }
             }
         }).start();
-    }
+    }*/
 
     public void closeAll(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
         try {

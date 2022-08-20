@@ -24,7 +24,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MaterialDesignIconView>
-      <TextField fx:id="txtMessageBox" layoutX="7.0" layoutY="398.0" prefHeight="39.0" prefWidth="608.0" promptText="Message" style="-fx-background-radius: 15; -fx-background-color: #95a5a6;" styleClass="text-position" stylesheets="@assets/styles/styles.css" />
       <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="2.0" layoutY="48.0" prefHeight="346.0" prefWidth="643.0" style="-fx-background-color: #2d3436;" stylesheets="@assets/styles/styles.css">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="616.0" prefWidth="624.0" style="-fx-background-color: #2d3436;">
@@ -54,5 +53,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MaterialDesignIconView>
+      <TextField fx:id="txtMessageBox" layoutX="7.0" layoutY="394.0" prefHeight="39.0" prefWidth="608.0" promptText="Message" style="-fx-background-radius: 15; -fx-background-color: #95a5a6;" styleClass="text-position" stylesheets="@assets/styles/styles.css" />
    </children>
 </AnchorPane>

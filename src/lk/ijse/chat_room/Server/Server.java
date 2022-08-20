@@ -1,8 +1,6 @@
 package lk.ijse.chat_room.Server;
 
 import javafx.scene.layout.VBox;
-import lk.ijse.chat_room.Client.ClientHandler;
-import lk.ijse.chat_room.controller.ServerFormController;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -18,24 +16,26 @@ public class Server {
     private BufferedWriter bufferedWriter;
 
     private ExecutorService pool;
-    private boolean done;
+    private boolean serverIsShutdown;
 
     public Server(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
-        this.done = false;
+        this.serverIsShutdown = false;
     }
 
     public void startServer(VBox server_vBox) {
-//        System.out.println("inside startServer");
         try {
-            while (!done) {
+            while (!serverIsShutdown) {
+//                System.out.println("before accept");
                 socket = serverSocket.accept();
+//                System.out.println("after accept");
                 this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
                 System.out.println("A new employee has entered the chat");
 
 //                ServerFormController.displayMsgOnLeft("A new employee has joined the chat", server_vBox);
 
+                // Use separate threads, and give each new client Socket to a new thread
                 ClientHandler clientHandler = new ClientHandler(socket, server_vBox);
                 Thread thread = new Thread(clientHandler);
                 thread.start();
@@ -47,7 +47,7 @@ public class Server {
     }
 
     public void closeServerSocket() {
-        done = true;
+        serverIsShutdown = true;
         try {
             if (serverSocket != null) serverSocket.close();
 
