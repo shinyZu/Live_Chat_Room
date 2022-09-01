@@ -2,11 +2,7 @@
 
 <br>
 
-## coursework given for module "Introduction to Network Programming".....
-
-<br>
-
-## Used :
+## Technology Stack :
 
 - Java Socket Programming
 - JavaFX
